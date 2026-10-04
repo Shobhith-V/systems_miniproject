@@ -1,0 +1,28 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files
+data/*.parquet
+
+# Generated results
+results/*.parquet
+results/*.csv
+
+# Generated figures
+figures/*.png
+
+# Report build files
+report/*.aux
+report/*.log
+report/*.out
+report/*.synctex.gz
