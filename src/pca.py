@@ -39,9 +39,8 @@ if __name__ == "__main__":
     # Load raw data
     normal, faulty = load_data()
 
-    # Split normal data into train/validation/test
+    # Splitting normal data into train/validation/test
     train, validation, test = split_normal_data(normal)
-
     # Fit standardization using training data only
     mean, std = fit_standardization(train)
 
@@ -55,27 +54,18 @@ if __name__ == "__main__":
     pca, k = fit_pca(train)
 
     print(f"Number of retained components: {k}")
-    print(
-        f"Explained variance: "
-        f"{np.sum(pca.explained_variance_ratio_[:k]):.4f}"
-    )
+    print(f"Explained variance: "f"{np.sum(pca.explained_variance_ratio_[:k]):.4f}")
 
-    # Calculate PCA scores
+    # Calculating PCA scores
     validation_results = make_results(validation, pca, k)
     test_results = make_results(test, pca, k)
     faulty_results = make_results(faulty, pca, k)
 
-    # Combine results
-    results = pd.concat(
-        [validation_results, test_results, faulty_results],
-        ignore_index=True
-    )
-
+    # Combining results
+    results = pd.concat([validation_results, test_results, faulty_results],ignore_index=True)
+    
     # Save results
-    results.to_parquet(
-        "results/scores_pca.parquet",
-        index=False
-    )
+    results.to_parquet("results/scores_pca.parquet",index=False)
 
     print(f"Saved {len(results)} PCA scores")
     print(results.head())
